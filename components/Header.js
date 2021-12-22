@@ -7,7 +7,7 @@ function Header() {
             
             <div className="relative flex items-center h-10 cursor-pointer">
                 <Image src="https://news.airbnb.com/wp-content/uploads/sites/4/2017/01/airbnb_vertical_lockup_web.png?fit=451%2C493" 
-                layout="fill" objectFit="contain" objectPosition="left"/>
+                layout="fill" objectFit="contain" objectPosition="left" alt=""/>
                 {/* <img src="" alt=""/> */}
                 {/* Next js image tag does compression and turn that image in webP */}
             </div>
