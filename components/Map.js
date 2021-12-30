@@ -1,7 +1,7 @@
 import React , {useState} from 'react';
 import ReactMapGL, {Marker, Popup} from 'react-map-gl';
 import { getCenter } from 'geolib';
-import {LocationMarkerIcon, UserCircleIcon} from '@heroicons/react/solid';
+import {LocationMarkerIcon} from '@heroicons/react/solid';
 
 function Map({searchResults}) {
     const [selectedLocation, setSelectedLocation] = useState({});
