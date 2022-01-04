@@ -10,7 +10,7 @@ function Randomlive() {
     const imageArr = [one, two, three, four];
     return (
         <div>
-            <h2 className='text-4xl font-semibold py-8'>Live Anywhere</h2>
+            <h2 className='text-4xl font-semibold py-8 dark:text-white'>Live Anywhere</h2>
             <div className='flex space-x-4 overflow-scroll scrollbar-hide p-3 -ml-3'>
                 {live.items.map((item, index)=><MediumCard key={index} title={item.title} image={imageArr[index]}/>)}
             </div>

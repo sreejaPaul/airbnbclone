@@ -7,7 +7,7 @@ function MediumCard(props) {
             <div className='relative h-80 w-80'>
                 <Image src={props.image} layout='fill' className='rounded-xl' alt=""/>
             </div>
-            <h3 className='text-2xl mt-3'>{props.title}</h3>
+            <h3 className='text-2xl mt-3 dark:text-white'>{props.title}</h3>
         </div>
     )
 }

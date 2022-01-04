@@ -10,7 +10,8 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div className={styles.container, "dark:bg-slate-700"} >
+
       {/* Topbar */}
       <Head>
         <title>Airbnb Clone</title>
@@ -18,22 +19,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
-      <Header/>
+
+      <Header />
       {/* <Header/>=> self closed componenet */}
-      <Banner/>
-      <main className='max-w-7xl mx-auto px-8 sm:px-16'>
+      <Banner />
+      <main className='max-w-7xl mx-auto px-8 sm:px-16 border-2 border-gray-200 drop-shadow-md mt-5 dark:bg-slate-700 dark:border-slate-800'>
         <section className='pt-6'>
-          <Explore/>
-          {/*Pull some data from server-api*/ }
+          <Explore />
+          {/*Pull some data from server-api*/}
         </section>
         <section>
-          <Randomlive/>
+          <Randomlive />
         </section>
-        <LargeCard/>
+        <LargeCard />
       </main>
-      <Footer/>
+      <Footer />
     </div>
+
   )
 }
 

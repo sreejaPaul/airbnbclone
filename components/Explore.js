@@ -14,7 +14,7 @@ function Explore() {
     const imageArr = [one, two, three, four, five, six, seven, eight];
     return (
         <div>
-            <h2 className='text-4xl font-semibold pb-5'>Explore Nearby</h2>
+            <h2 className='text-4xl font-semibold pb-5 dark:text-white'>Explore Nearby</h2>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                 {places?.map((item, index)=><Smallcard key={index} image={imageArr[index]} name={item.name} time={item.time}/>)}
             </div>
