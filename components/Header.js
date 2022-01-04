@@ -115,7 +115,7 @@ function Header({ placeholder }) {
                 {/* <p className="hidden md:inline cursor-pointer">Become a host</p>
                 <GlobeAltIcon className="h-6" /> */}
                 <div className="flex items-center space-x-2 border-2 p-2 rounded-full cursor-pointer dark:border-slate-900" onClick={themeToggle}>
-                    {darkIcon ? <SunIcon className='h-6 dark:text-white'/> : <MoonIcon className="h-6" />}
+                    {!darkIcon ? <SunIcon className='h-6 dark:text-white'/> : <MoonIcon className="h-6" />}
                 </div>
             </div>
             {searchFocus &&
@@ -129,7 +129,7 @@ function Header({ placeholder }) {
                         onChange={handleSelect}
                     />
                     </Container>
-                    <div className=' items-center -mt-2'>
+                    <div className=' items-center'>
                         <h2 className='text-xl font-semibold border-b mb-4 dark:text-white'>
                             <div className='flex'>
                                 <div>Add Guests Here</div>
