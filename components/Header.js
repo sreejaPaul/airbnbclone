@@ -46,6 +46,7 @@ function Header({ placeholder }) {
                     startDate: startDate.toISOString(),
                     endDate: endDate.toISOString(),
                     noOfAdults,
+                    noOfChild
                 }
             });
         } else {

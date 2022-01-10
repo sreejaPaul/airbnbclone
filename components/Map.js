@@ -6,64 +6,127 @@ import { urlObjectKeys } from 'next/dist/shared/lib/utils';
 import { resultImages } from "../data";
 import styled from "styled-components";
 
-function Map({ searchResults, result }) {
-    const [selectedLocation, setSelectedLocation] = useState({});
+function Map({ searchResults, result, hotels, loading }) {
+  const [coordinateArr, setCoordinateArr] = useState([]);
+  const [centerobj, setCenterObj] = useState({});
+  const [viewport, setViewport] = useState({});
+  const [selectedLocation, setSelectedLocation] = useState({});
 
-    //Transform searchResults into geolib center obj
-    const coordinates = searchResults.map((result) => ({
-        latitude: result.lat,
-        longitude: result.long
-    }))
-    const center = getCenter(coordinates);
-
-    const [viewport, setViewport] = useState({
-        width: '100%',
-        height: '100%',
-        latitude: center.latitude,
-        longitude: center.longitude,
-        zoom: 11
-    });
-
-    useEffect(() => {
-        setSelectedLocation(result);
-    }, [result])
+  //Transform searchResults into geolib center obj
+  // const coordinates = searchResults.map((result) => ({
+  //     latitude: result.lat,
+  //     longitude: result.long
+  // }))
 
 
-    return (
+  // const center = getCenter(coordinateArr);
 
-        <ReactMapGL
-            mapStyle="mapbox://styles/s-paul/ckxrr83jv0m0614qu6c6rt6r8"
-            mapboxApiAccessToken={process.env.mapbox_key}
-            {...viewport}
-            onViewportChange={(viewport) => setViewport(viewport)}
-        >
-            <MapContainer>
-                {
-                    searchResults.map((res, index) => (
-                        <div key={res.long}>
-                            <Marker longitude={res.long} latitude={res.lat} offsetLeft={-20} offsetTop={-10} style={{ zIndex: "-1" }}>
-                                <p className='cursor-pointer text-sm text-red-400 font-bold animate-bounce' style={{ zIndex: "-1" }} onClick={() => setSelectedLocation(res)}>
-                                    <LocationMarkerIcon style={{ color: "#FD5B61", height: "30px" }} className='text-sm' />Hotel
-                                </p>
-                            </Marker>
-                            {selectedLocation.long === res.long ?
-                                <Popup tipSize={5} anchor="top" closeOnClick={true} onClose={() => setSelectedLocation({})} latitude={res.lat} longitude={res.long} style={{ backgroundColor: "black" }}>
-                                    {/* <div style={{backgroundImage : "url('" + res.img + "')" ,margin:"0px", padding:"0px", height:"144px",width:"200px", backgroundSize:"cover", color:"white",fontWeight:"bold", padding:"10px"}}>
+  // const [viewport, setViewport] = useState({
+  //     width: '100%',
+  //     height: '100%',
+  //     latitude: centerobj.latitude,
+  //     longitude: centerobj.longitude,
+  //     zoom: 11
+  // });
+
+  useEffect(() => {
+    setSelectedLocation(result);
+  }, [result])
+
+  useEffect(() => {
+    if (!loading) {
+      if (hotels.length > 0) {
+        const coordinates = hotels.map((result) => ({
+          latitude: result.latitude,
+          longitude: result.longitude
+        }))
+        setCoordinateArr(coordinates);
+      } else {
+        const coordinates = searchResults.map((result) => ({
+          latitude: result.lat,
+          longitude: result.long
+        }))
+        setCoordinateArr(coordinates);
+      }
+    }
+
+  }, [loading])
+
+  useEffect(() => {
+    const center = getCenter(coordinateArr);
+    setCenterObj(center);
+  }, [coordinateArr])
+
+  useEffect(() => {
+    setViewport({
+      width: '100%',
+      height: '100%',
+      latitude: centerobj.latitude,
+      longitude: centerobj.longitude,
+      zoom: 11
+    })
+  }, [centerobj])
+
+
+  return (
+
+    <ReactMapGL
+      mapStyle="mapbox://styles/s-paul/ckxrr83jv0m0614qu6c6rt6r8"
+      mapboxApiAccessToken={process.env.mapbox_key}
+      {...viewport}
+      onViewportChange={(viewport) => setViewport(viewport)}
+    >
+      <MapContainer>
+        {(hotels.length > 0) ?
+          <>{
+            hotels.map((res, index) => (
+              <div key={res.long}>
+                <Marker longitude={res.longitude} latitude={res.latitude} offsetLeft={-20} offsetTop={-10} style={{ zIndex: "-1" }}>
+                  <p className='cursor-pointer text-sm text-red-400 font-bold animate-bounce' style={{ zIndex: "-1" }} onClick={() => setSelectedLocation(res)}>
+                    <LocationMarkerIcon style={{ color: "#FD5B61", height: "30px" }} className='text-sm' />Hotel
+                  </p>
+                </Marker>
+                {selectedLocation.longitude === res.longitude ?
+                  <Popup tipSize={5} anchor="top" closeOnClick={true} onClose={() => setSelectedLocation({})} latitude={res.latitude} longitude={res.longitude} style={{ backgroundColor: "black" }}>
+                    {/* <div style={{backgroundImage : "url('" + res.img + "')" ,margin:"0px", padding:"0px", height:"144px",width:"200px", backgroundSize:"cover", color:"white",fontWeight:"bold", padding:"10px"}}>
                                     <h5>{res.title}</h5>
                                     <h4>{res.price}</h4>
                                 </div> */}
-                                    <PopupInner bg={res.img}>
-                                        <h5 className='text-white font-bold'>{res.title}</h5>
-                                        <h4 className='text-white font-bold'>{res.price}</h4>
-                                    </PopupInner>
-                                </Popup> : (false)}
-                        </div>
-                    ))
-                }
-            </MapContainer>
-        </ReactMapGL>
+                    <PopupInner bg={res.max_1440_photo_url}>
+                      <h5 className='text-white font-bold'>{res.hotel_name}</h5>
+                      {/* <h4 className='text-white font-bold'>{res.price}</h4> */}
+                    </PopupInner>
+                  </Popup> : (false)}
+              </div>
+            ))}
+          </> :
+          <>
+            {searchResults.map((res, index) => (
+              <div key={res.long}>
+                <Marker longitude={res.long} latitude={res.lat} offsetLeft={-20} offsetTop={-10} style={{ zIndex: "-1" }}>
+                  <p className='cursor-pointer text-sm text-red-400 font-bold animate-bounce' style={{ zIndex: "-1" }} onClick={() => setSelectedLocation(res)}>
+                    <LocationMarkerIcon style={{ color: "#FD5B61", height: "30px" }} className='text-sm' />Hotel
+                  </p>
+                </Marker>
+                {selectedLocation.long === res.long ?
+                  <Popup tipSize={5} anchor="top" closeOnClick={true} onClose={() => setSelectedLocation({})} latitude={res.lat} longitude={res.long} style={{ backgroundColor: "black" }}>
+                    {/* <div style={{backgroundImage : "url('" + res.img + "')" ,margin:"0px", padding:"0px", height:"144px",width:"200px", backgroundSize:"cover", color:"white",fontWeight:"bold", padding:"10px"}}>
+                                    <h5>{res.title}</h5>
+                                    <h4>{res.price}</h4>
+                                </div> */}
+                    <PopupInner bg={res.img}>
+                      <h5 className='text-white font-bold'>{res.title}</h5>
+                      <h4 className='text-white font-bold'>{res.price}</h4>
+                    </PopupInner>
+                  </Popup> : (false)}
+              </div>
+            ))
+            }</>
+        }
+      </MapContainer>
+    </ReactMapGL>
 
-    )
+  )
 }
 
 export default Map

@@ -44,14 +44,14 @@ export const discover = {
   };
   
   export const places = [
-    { name: "Bengaluru", time: 3 },
-    { name: "Puducherry", time: 3 },
-    { name: "Kodaikannal", time: 3.5 },
-    { name: "Mysuru", time: 4 },
-    { name: "Chennai", time: 4.5 },
-    { name: "Kochi", time: 6 },
-    { name: "Ooty", time: 3.5 },
-    { name: "Trivandrum", time: 7.5 },
+    { name: "Bengaluru", description: "Silicon Valley of India"},
+    { name: "Assam", description: "Tea City of India"},
+    { name: "Jharkhand", description: "Coal Capital of India" },
+    { name: "Mysuru", description: "City of Palaces" },
+    { name: "Chennai", description: "Gateway of South-India" },
+    { name: "Kolkata", description: " City of Joy" },
+    { name: "Ooty", description: " Queen of hill stations" },
+    { name: "Delhi", description: "City of rallies" },
   ];
   
   export const resultImages = [
