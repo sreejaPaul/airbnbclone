@@ -1,3 +1,24 @@
+# Airbnb - Clone
+![AirbnbClone](https://user-images.githubusercontent.com/88406499/149125535-4b0bb0d5-4566-451a-8972-ace3a7fab450.png)
+
+
+Build with Next JS, MapBox, Rapid API, Tailwind CSS. This web app has these following features:
+1. User can search hotels of different places by providing city name, date duration and no of guests.
+2. On succesfull response from Rapid API, list of hotels can be seen.
+3. On unsuccessfull response from Rapid API, list of dummy hotels can be seen.
+4. A map is also present where hotel locations are visible.
+
+## Watch Here
+Live Demo - [Click Here](https://airbnbclone-snowy.vercel.app/)
+
+# Built With
+* Next JS
+* Mapbox
+* Rapid API
+* Tailwind CSS
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
